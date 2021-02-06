@@ -5,6 +5,10 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [passwordhash, setPasswordhash] = useState("");
 
+  function validateForm() {
+    return username.length > 0 && passwordhash.length > 0;
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:3000/user/login", {
@@ -42,7 +46,9 @@ const Login = (props) => {
             value={passwordhash}
           />
         </FormGroup>
-        <Button type="submit">Login</Button>
+        <Button type="submit" disabled={!validateForm()}>
+          Login
+        </Button>
       </Form>
     </div>
   );

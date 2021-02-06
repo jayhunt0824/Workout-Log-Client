@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import React, { useState, useEffect } from "react";
 import SiteBar from "./home/Navbar";
 import Auth from "./auth/Auth";
@@ -34,9 +34,9 @@ function App() {
 
   return (
     <div>
-      <SiteBar clearToken={clearToken} />
+      <SiteBar clickLogout={clearToken} />
+      {/*<Auth updateToken={updateToken}/>*/}
       {protectedViews()}
-      <Auth updateToken={updateToken} />
     </div>
   );
 }

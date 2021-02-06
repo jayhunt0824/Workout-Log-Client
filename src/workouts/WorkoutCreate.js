@@ -7,7 +7,7 @@ const WorkoutCreate = (props) => {
   const [result, setResult] = useState("");
 
   const handleSubmit = (e) => {
-    e.prevent.default();
+    e.preventDefault();
     fetch("http://localhost:3000/log/", {
       method: "POST",
       body: JSON.stringify({

@@ -2,12 +2,22 @@ import React from "react";
 import { Table, Button } from "reactstrap";
 
 const WorkoutTable = (props) => {
+  const deleteWorkout = (workout) => {
+    fetch(`http://localhost:3000/log/${workout.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: props.token,
+      }),
+    }).then(() => props.fetchWorkouts());
+  };
+
   const workoutMapper = () => {
     return props.workouts.map((workout, index) => {
       return (
         <tr key={index}>
           <th scope="row">{workout.id}</th>
-          <td>{workout.results}</td>
+          <td>{workout.result}</td>
           <td>{workout.description}</td>
           <td>{workout.definiton}</td>
           <td>
@@ -34,16 +44,6 @@ const WorkoutTable = (props) => {
     });
   };
 
-  const deleteWorkout = (workout) => {
-    fetch(`http://localhost:3000/log/${workout.id}`, {
-      method: "DELETE",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: props.token,
-      }),
-    }).then(() => props.fetchWorkouts());
-  };
-
   return (
     <>
       <h3>Workout History</h3>
@@ -57,7 +57,7 @@ const WorkoutTable = (props) => {
             <th>Definition</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>{workoutMapper()}</tbody>
       </Table>
     </>
   );
